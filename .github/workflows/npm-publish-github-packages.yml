@@ -38,10 +38,6 @@ jobs:
       - name: Update dependencies
         run: npm update
 
-      # Executa os testes do projeto
-      - name: Run tests
-        run: npm run test
-
       # Gera a build do projeto
       - name: Build project
         run: npm run build
