@@ -1,36 +1,44 @@
-# This is a basic workflow to help you get started with Actions
+name: CI for Vue Project
 
-name: CI
-
-# Controls when the workflow will run
+# Quando o workflow deve ser executado
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches:
+      - main  # Executa o workflow em push na branch "main"
   pull_request:
-    branches: [ "main" ]
+    branches:
+      - main  # Executa o workflow em pull requests para a branch "main"
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# Definição dos jobs
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
+
+    # Sistema operacional e versão Node.js
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    # Estratégia para diferentes versões do Node.js
+    strategy:
+      matrix:
+        node-version: [16.x, 18.x]  # Teste com versões recomendadas do Node.js
+
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      # Checa o repositório
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      # Configura o Node.js e instala dependências
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
 
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Install dependencies
+        run: npm install
+
+      # Executa os testes do projeto
+      - name: Run tests
+        run: npm run test
+
+      # Gera a build do projeto
+      - name: Build project
+        run: npm run build
