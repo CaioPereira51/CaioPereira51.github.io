@@ -19,7 +19,7 @@ jobs:
     # Estratégia para diferentes versões do Node.js
     strategy:
       matrix:
-        node-version: [16.x, 18.x]  # Teste com versões recomendadas do Node.js
+        node-version: [18.x]  # Teste com versões recomendadas do Node.js
 
     steps:
       # Checa o repositório
