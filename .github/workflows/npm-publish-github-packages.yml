@@ -1,6 +1,6 @@
 name: CI for Vue Project
 
-# Quando o workflow deve ser executado
+# Define quando o workflow deve ser executado
 on:
   push:
     branches:
@@ -16,10 +16,10 @@ jobs:
     # Sistema operacional e versão Node.js
     runs-on: ubuntu-latest
 
-    # Estratégia para diferentes versões do Node.js
+    # Estratégia para a versão 20 do Node.js
     strategy:
       matrix:
-        node-version: [18.x]  # Teste com versões recomendadas do Node.js
+        node-version: [20.x]  # Usando apenas a versão mais recente e suportada do Node.js
 
     steps:
       # Checa o repositório
