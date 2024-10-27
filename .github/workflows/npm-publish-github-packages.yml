@@ -19,7 +19,7 @@ jobs:
     # Estratégia para a versão 20 do Node.js
     strategy:
       matrix:
-        node-version: [20.x]  # Usando apenas a versão mais recente e suportada do Node.js
+        node-version: [18.x]  # Usando apenas a versão mais recente e suportada do Node.js
 
     steps:
       # Checa o repositório
